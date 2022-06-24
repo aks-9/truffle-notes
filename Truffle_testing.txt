@@ -1,0 +1,47 @@
+
+***WRITING TEST-CASES***
+
+const ContractName = artifacts.require('ContractName.sol');
+
+contract('ContractName', () => {
+  it('Should update data', async () => {
+
+    const storage = await ContractName.new(); //deploying our smart contract
+
+    await storage.updateData(10); //calling the function of our smart contract to write
+
+    const data = await storage.readData(); //reading data from our smart contract.
+
+    assert(data.toString() === '10'); //Using toString method to compare because JS can't handle too large numbers returned by Solidity.
+  });
+});
+
+
+
+const ContractName = artifacts.require('ContractName.sol');
+
+contract('ContractName', () => {
+  it('Should update data', async () => {
+
+    const storage = await ContractName.new();
+
+    await storage.updateData(10);
+
+    const data = await storage.readData();
+
+    assert(data.toString() === '10');
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+***TO RUN THE TEST CASES***
+truffle test

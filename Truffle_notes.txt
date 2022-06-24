@@ -1,0 +1,170 @@
+***Install Truffle after installing node.js.***
+
+
+npm install -g truffle
+
+
+truffle version
+
+
+
+
+
+***INITIATING A PROJECT***
+
+
+truffle init
+
+
+
+
+
+***COMPILATION***
+
+
+truffle compile
+
+
+Two files will be crated in 'build' folder: 
+demo.json and Migrations.json
+
+demo.json will have 'abi' as well as 'bytecode' of the compiled contract.
+
+
+
+
+
+***DEPLOYMENT***
+In the migration folder, create a copy of the 1_migration.js file and rename it as 2_demo_migration.js. The order of deployment is according to the number in the name of the file.
+
+Then replace the 'Migrations' word with 'demo' in the JS code.
+
+
+Then go to the file 'truffle.config.js' file and find the 'networks' and uncomment the 'development' block.
+
+change the 'port' to 7545 and keep your Ganache running in background.
+
+then execute:
+
+
+truffle migrate
+
+
+no need to compile first, migrate will compile as well.
+
+
+
+
+
+
+
+
+***Re-deployment***
+
+truffle migrate --reset
+
+
+
+
+
+***INFURA SETUP****
+
+It's a full node to eaisly connect to the Ethereum blockchain. It helps to deploy our contract on testnet or mainnet eaisily.
+
+Register, login and create a new project. Choose blockchain. Then you will get ENDPOINTS for the selected blockchain, which we can use to connect to the mainnet or testnet.
+
+
+
+
+
+***CONFIGURE TRUFFLE FOR INFURA ****
+Uncomment the ropsten network in 'truffle.config.js' under 'networks'
+
+Then copy and paste your infura endpoint in provider section along with mnemonic.
+
+uncomment this line of code:
+
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+This will connect Infura and Metamask wallet.
+
+create a mnemonic variable.
+const mnemonic = 'PASTE MNEMONIC HERE';
+
+
+
+
+
+***DEPLOYMENT ON ROPSTEN TEST NETWORK****
+ run:
+  
+ npm install @truffle/hdwallet-provider
+ 
+ truffle migrate --network ropsten
+
+
+
+
+
+***SMART CONTRACT INTEGRATION WITH REACT***
+
+Goto https://trufflesuite.com/boxes/
+
+choose REACT
+
+
+create a new folder called 'frontend' in your project folder
+
+change directory
+cd frontend
+
+truffle unbox react
+
+This will create all the required folders for frontend.
+
+Goto the truffle.config.js file in the newly created frontend folder.
+
+set the port to 7545
+
+client folder will have all the REACT.JS files.
+
+
+change the solidity version of the default contracts to 0.9.0
+
+then run:
+
+truffle compile
+
+
+
+We will get a contracts folder in client/src
+
+All the abi and bytecode will be in the  json file under client folder as client needs to interact with smart contracts.
+
+truffle migrate
+
+
+
+
+***RUNNING OUR REACT APP****
+
+cd client
+
+npm start
+
+This will start react app and give an error. Because our Metamask is connected with Ropsten but we connected truffle with Ganache. So we've to connect Metamask with Ganache.
+
+Go to Metamask and add a custom RPC to the networks.
+
+Network name: Ganache GUI
+New RPC url: HTTP://127.0.0.1:7545
+chain ID: 1337
+
+import account from Ganache into Metamask.
+Paste the private key of one of the accounts of Ganache and import.
+
+Refersh the React app and it will give the Metamask popup.
+
+
+
+
